@@ -1,0 +1,410 @@
+/* =========================
+   Gen-Z Professional Light Theme
+   File: styles/style.css
+   Applies to: index, profile, projects, skills, achievements
+   ========================= */
+
+/* ---------- Reset & Box model ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- Design tokens (Light Mode) ---------- */
+:root {
+  /* Colors */
+  --bg-900: #ffffff; /* main background */
+  --bg-800: #f7f8fb; /* light card or section bg */
+  --card: rgba(255,255,255,0.9);
+  --glass-border: rgba(0,0,0,0.05);
+  --muted: #5a5f6f;
+  --accent: #00b8a9;     /* teal neon accent */
+  --accent-2: #ff6ec7;   /* pink pop accent */
+  --cta-text: #ffffff;
+  --glass-shadow: 0 4px 30px rgba(0,0,0,0.08);
+
+  /* Typography & layout */
+  --pad: 20px;
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --max-width: 1200px;
+
+  /* Motion */
+  --ease: cubic-bezier(.2,.9,.3,1);
+  --fast: 180ms;
+  --med: 320ms;
+}
+
+/* ---------- Base body ---------- */
+body {
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: radial-gradient(circle at 15% 15%, #f5fcff 0%, #f2f6f9 40%, #eef1f4 100%);
+  color: #1a1a1a;
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+  min-height: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ---------- Utility helpers ---------- */
+.container {
+  width: min(96%, var(--max-width));
+  margin-inline: auto;
+  padding-inline: var(--pad);
+}
+
+/* reusable card style */
+.card {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(6px) saturate(160%);
+}
+
+/* accessible focus */
+:focus {
+  outline: 3px solid rgba(0,184,169,0.18);
+  outline-offset: 2px;
+}
+
+/* ---------- Header / Navigation ---------- */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: rgba(255,255,255,0.75);
+  border-bottom: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+}
+
+header .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--accent);
+  margin-left: 6px;
+  letter-spacing: 0.3px;
+}
+
+nav {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 10px;
+  transition: color var(--med) var(--ease), transform var(--med) var(--ease);
+  position: relative;
+}
+
+/* underline hover effect */
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: 4px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--med) var(--ease);
+  opacity: 0.8;
+  border-radius: 2px;
+}
+
+nav a:hover,
+nav a:focus {
+  color: var(--accent);
+}
+
+nav a:hover::after,
+nav a:focus::after {
+  transform: scaleX(1);
+}
+
+/* ---------- HERO ---------- */
+.hero {
+  min-height: 70vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 60px 10px;
+}
+
+.hero .hero-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 16px;
+}
+
+.hero h2 {
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  margin: 0;
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+}
+
+.hero p {
+  margin-top: 14px;
+  color: #4c5465;
+  font-size: 1.05rem;
+}
+
+/* CTA */
+.cta-btn {
+  display: inline-block;
+  margin-top: 24px;
+  padding: 12px 30px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: var(--cta-text);
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 8px 25px rgba(0,184,169,0.25);
+  transition: transform var(--fast) var(--ease), box-shadow var(--fast) var(--ease);
+}
+
+.cta-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 40px rgba(0,184,169,0.35);
+}
+
+/* ---------- Team section ---------- */
+.team-section {
+  padding: 48px 0;
+  text-align: center;
+}
+
+.team-section h2 {
+  font-size: 1.9rem;
+  color: var(--accent);
+  margin-bottom: 30px;
+  text-shadow: 0 2px 14px rgba(0,184,169,0.1);
+}
+
+.team-grid {
+  display: grid;
+  gap: 28px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  align-items: start;
+  justify-items: center;
+}
+
+.team-member {
+  width: 100%;
+  max-width: 260px;
+  padding: 24px;
+  border-radius: var(--radius-md);
+  text-align: center;
+  border: 1px solid var(--glass-border);
+  background: rgba(255,255,255,0.85);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+  transition: transform var(--med) var(--ease), box-shadow var(--med) var(--ease);
+}
+
+.team-member:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 18px 40px rgba(0,184,169,0.15);
+}
+
+.team-member img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto 12px;
+  padding: 6px;
+  background: linear-gradient(180deg, #ffffff, #f2f8fa);
+}
+
+/* ---------- Profile ---------- */
+.profile-card {
+  margin: 60px auto;
+  max-width: 760px;
+  padding: 28px;
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--glass-border);
+  background: #ffffff;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+}
+
+/* mobile column */
+@media (max-width: 860px) {
+  .profile-card {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.profile-card img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid rgba(0,184,169,0.1);
+  box-shadow: 0 10px 25px rgba(0,184,169,0.1);
+}
+
+.profile-card h2 { margin: 0; font-size: 1.6rem; color: #1a1a1a; }
+.profile-card p { margin-top: 8px; color: #4a4a4a; }
+
+/* ---------- Projects ---------- */
+.projects {
+  margin: 48px 0;
+  display: grid;
+  gap: 26px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.project-card {
+  padding: 20px;
+  border-radius: 14px;
+  border: 1px solid var(--glass-border);
+  background: rgba(255,255,255,0.95);
+  transition: transform var(--med) var(--ease), box-shadow var(--med) var(--ease);
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 14px 40px rgba(0,184,169,0.15);
+}
+
+.project-card h2 { color: #222; margin: 0 0 8px 0; }
+.project-card p { color: #5f6470; margin: 0; }
+
+.btn {
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: #f4f8fa;
+  border: 1px solid #e0e6ea;
+  color: #2a2a2a;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* ---------- Skills ---------- */
+.skills {
+  margin: 40px auto;
+  max-width: 900px;
+  display: grid;
+  gap: 16px;
+}
+
+.skill {
+  display: grid;
+  gap: 8px;
+}
+
+.skill span {
+  font-weight: 600;
+  color: #222;
+}
+
+.bar {
+  background: #eef3f6;
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.level {
+  height: 14px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  width: 0;
+  transition: width 900ms var(--ease);
+}
+
+.skill:hover .level {
+  filter: brightness(1.1);
+}
+
+/* ---------- Achievements ---------- */
+.achievements {
+  margin: 44px auto;
+  max-width: 1000px;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.achievement-card {
+  padding: 22px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid var(--glass-border);
+  transition: transform var(--med) var(--ease), box-shadow var(--med) var(--ease);
+}
+
+.achievement-card h2 { color: #1f1f1f; margin: 0 0 8px 0; }
+.achievement-card p { color: #5a6169; margin: 0; }
+
+.achievement-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 36px rgba(0,184,169,0.15);
+}
+
+/* ---------- Footer ---------- */
+footer {
+  margin-top: 60px;
+  padding: 22px 0;
+  text-align: center;
+  color: #5b6674;
+  font-size: 0.95rem;
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+/* ---------- Small Screen ---------- */
+@media (max-width: 540px) {
+  .hero { padding: 46px 14px; }
+  .cta-btn { padding: 10px 20px; font-size: 0.95rem; }
+  .profile-card img { width: 120px; height: 120px; }
+}
+
+/* ---------- Motion preference ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+
+/* ---------- Empty state helper ---------- */
+.empty-center {
+  display: grid;
+  place-items: center;
+  min-height: 180px;
+  color: #7f8994;
+}
